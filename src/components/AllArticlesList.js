@@ -94,7 +94,7 @@ const AllArticlesList = ({ isAbridged }) => {
           })
           .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
         if (isAbridged) {
-          filteredData = filteredData.slice(0, 5);
+          filteredData = filteredData.slice(0, 7);
         }
         setData(filteredData);
       },
