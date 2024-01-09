@@ -23,7 +23,10 @@ const HomePage = () => {
         <div className="articles-and-graph">
           <div className="recent-articles">
             <div className="article-heading">
-              <h2 className="home-page-subtitle "> Recent Articles </h2>
+              <h2 className="home-page-subtitle ">
+                {" "}
+                Landscape Related Articles{" "}
+              </h2>
               <span
                 className="click-more"
                 onClick={() => {

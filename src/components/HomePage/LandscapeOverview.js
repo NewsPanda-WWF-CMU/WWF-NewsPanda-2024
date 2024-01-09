@@ -5,12 +5,14 @@ import ArticleStats from "./LandscapeOverview/ArticleStats";
 import Papa from "papaparse";
 import csvData from "../../data/test-last-year-nepal-cleaned.csv";
 import "./LandscapeOverview.css";
+import LandscapeMap from "./LandscapeOverview/LandscapeMap";
 
 const LandscapeOverview = () => {
   const [data, setData] = useState([]);
   const [conservationEvents, setConservationEvents] = useState(0);
   const [infrastructureEvents, setInfrastructureEvents] = useState(0);
   const [criticalLandscape, setCriticalLandscape] = useState("");
+  const [landscapeCounts, setLandscapeCounts] = useState("");
 
   useEffect(() => {
     Papa.parse(csvData, {
@@ -70,14 +72,17 @@ const LandscapeOverview = () => {
         setConservationEvents(conservationCount);
         setInfrastructureEvents(infrastructureCount);
         setCriticalLandscape(maxLandscape);
+        setLandscapeCounts(landscapeCounts);
       },
     });
   }, []);
+
+  console.log(landscapeCounts);
   return (
     <div className="landscape-overview">
       <h2 className="landscape-heading">Landscape Overview</h2>
       <div className="landscape-content">
-        This is the map
+        <LandscapeMap landscapeCounts={landscapeCounts} />
         <ArticleStats
           articleCount={data.length}
           conservationEvents={conservationEvents}
