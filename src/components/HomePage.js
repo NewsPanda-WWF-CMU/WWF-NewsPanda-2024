@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./HomePage/Header";
+import Header from "./Header";
 import LandscapeOverview from "./HomePage/LandscapeOverview";
 import ArticleList from "./HomePage/ArticleList";
 import FaunaFloraBreakdown from "./HomePage/FaunaFloraBreakdown";

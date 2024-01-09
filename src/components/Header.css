@@ -1,0 +1,33 @@
+/* Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background-color: #fff; /* Adjust color as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* This adds a subtle shadow to the header */
+}
+
+.header-logo img {
+    height: 50px; /* Adjust size as needed */
+}
+
+.header-navigation {
+    display: flex;
+    align-items: center;
+}
+
+.header-dropdown {
+    display: flex;
+    cursor: pointer;
+}
+
+.header-dropdown-item {
+    margin-right: 20px; /* Space between items */
+    font-weight: bold; /* Style as needed */
+    color: #333; /* Adjust color as needed */
+}
+
+.header-dropdown-item:last-child {
+    margin-right: 0;
+}
