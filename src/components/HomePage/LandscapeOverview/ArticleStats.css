@@ -1,0 +1,54 @@
+.article-stats-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates a two-column grid */
+    grid-gap: 20px; /* Space between grid items */
+    margin-top: 20px; /* Space above the grid */
+    max-width: 50%;
+    margin-left: auto;
+  }
+  
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    background: #e1e1e1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Center text */
+  }
+  
+  .icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .articles {
+    color: #6c5ce7; /* Adjust icon colors as needed */
+  }
+  
+  .conservation {
+    color: #55efc4;
+  }
+  
+  .critical {
+    color: #d63031;
+  }
+  
+  .infrastructure {
+    color: #e17055;
+  }
+  
+  .stat-count {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .stat-name {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #555;
+  }
+  

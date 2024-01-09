@@ -67,7 +67,7 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
   );
 };
 
-const AllArticlesList = () => {
+const AllArticlesList = ({ isAbridged }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -75,18 +75,31 @@ const AllArticlesList = () => {
       download: true,
       header: true,
       complete: (results) => {
-        const filteredData = results.data
+        let filteredData = results.data
           .filter((row) => {
             const hasPublishedDate =
               row.publishedAt && new Date(row.publishedAt).getTime() > 0;
-            const isLandscapeNotOther = row["Landscape-Location"];
-            return hasPublishedDate && isLandscapeNotOther;
+            const isLandscapeNotNone = row["Landscape-Location"];
+            const isLandscapeNotOther = row["Landscape-Location"] !== "Other";
+            const hasAuthor = row["author"];
+            if (isAbridged) {
+              return (
+                hasPublishedDate &&
+                isLandscapeNotNone &&
+                hasAuthor &&
+                isLandscapeNotOther
+              );
+            }
+            return hasPublishedDate && isLandscapeNotNone && hasAuthor;
           })
           .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+        if (isAbridged) {
+          filteredData = filteredData.slice(0, 5);
+        }
         setData(filteredData);
       },
     });
-  }, []);
+  }, [isAbridged]);
 
   const columns = useMemo(
     () => [
@@ -137,6 +150,41 @@ const AllArticlesList = () => {
                 .map((tag) => <span className="badge">{tag.trim()}</span>)
             : "",
         disableSortBy: true, // Disable sorting on this column
+      },
+      {
+        Header: "Landscape Location",
+        accessor: "Landscape-Location",
+        Filter: SelectColumnFilter, // A custom select filter component
+        filter: "includes",
+        disableSortBy: true, // Disable sorting on this column
+      },
+    ],
+    []
+  );
+
+  const abridgedColumns = useMemo(
+    () => [
+      {
+        Header: "Title",
+        accessor: "title",
+        Cell: ({ row }) => (
+          <a href={row.original.url} target="_blank" rel="noopener noreferrer">
+            {row.original.title}
+          </a>
+        ),
+        disableSortBy: true, // Disable sorting on this column
+      },
+      {
+        Header: "Date",
+        accessor: "publishedAt",
+        Cell: ({ value }) => {
+          const date = new Date(value);
+          return `${date.getDate()}/${
+            date.getMonth() + 1
+          }/${date.getFullYear()}`;
+        },
+        disableFilters: true, // Disable column filter for Date, we will use sorting
+        disableSortBy: true,
       },
       {
         Header: "Landscape Location",
@@ -202,7 +250,7 @@ const AllArticlesList = () => {
     state: { pageIndex, pageSize },
   } = useTable(
     {
-      columns,
+      columns: !isAbridged ? columns : abridgedColumns,
       data,
       initialState: { pageIndex: 0 },
       filterTypes,
@@ -217,16 +265,20 @@ const AllArticlesList = () => {
 
   return (
     <>
-      <Header />
-      <h1>All Articles</h1>
-      {showGlobalFilter && (
-        <GlobalFilter
-          preGlobalFilteredRows={preGlobalFilteredRows}
-          globalFilter={state.globalFilter}
-          setGlobalFilter={setGlobalFilter}
-        />
-      )}
-      <div className="table-container">
+      {!isAbridged ? (
+        <>
+          <Header />
+          <h1>All Articles</h1>
+          {showGlobalFilter && (
+            <GlobalFilter
+              preGlobalFilteredRows={preGlobalFilteredRows}
+              globalFilter={state.globalFilter}
+              setGlobalFilter={setGlobalFilter}
+            />
+          )}
+        </>
+      ) : null}
+      <div className={!isAbridged ? "table-container" : ""}>
         <table {...getTableProps()} className="table">
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -238,7 +290,7 @@ const AllArticlesList = () => {
                   >
                     {column.render("Header")}
                     {/* Only show sort indicator if sorting is enabled */}
-                    {!column.disableSortBy ? (
+                    {!column.disableSortBy && !isAbridged ? (
                       column.isSorted ? (
                         column.isSortedDesc ? (
                           <span className="sort-indicator desc">↓</span>
@@ -269,41 +321,48 @@ const AllArticlesList = () => {
             })}
           </tbody>
         </table>
-        <div className="pagination">
-          <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-            {"<<"}
-          </button>{" "}
-          <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-            {"<"}
-          </button>{" "}
-          <button onClick={() => nextPage()} disabled={!canNextPage}>
-            {">"}
-          </button>{" "}
-          <button
-            onClick={() => gotoPage(pageCount - 1)}
-            disabled={!canNextPage}
-          >
-            {">>"}
-          </button>{" "}
-          <span>
-            Page{" "}
-            <strong>
-              {pageIndex + 1} of {pageCount}
-            </strong>{" "}
-          </span>
-          <select
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-            }}
-          >
-            {[10, 20, 30, 40, 50].map((pageSize) => (
-              <option key={pageSize} value={pageSize}>
-                Show {pageSize}
-              </option>
-            ))}
-          </select>
-        </div>
+        {!isAbridged ? (
+          <div className="pagination">
+            <div className="pagination-controls">
+              <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                {"<<"}
+              </button>{" "}
+              <button
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              >
+                {"<"}
+              </button>{" "}
+              <button onClick={() => nextPage()} disabled={!canNextPage}>
+                {">"}
+              </button>{" "}
+              <button
+                onClick={() => gotoPage(pageCount - 1)}
+                disabled={!canNextPage}
+              >
+                {">>"}
+              </button>{" "}
+            </div>
+            <span>
+              Page{" "}
+              <strong>
+                {pageIndex + 1} of {pageCount}
+              </strong>{" "}
+            </span>
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+              }}
+            >
+              {[10, 20, 30, 40, 50].map((pageSize) => (
+                <option key={pageSize} value={pageSize}>
+                  Show {pageSize}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : null}
       </div>
     </>
   );
