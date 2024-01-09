@@ -33,8 +33,17 @@ const FaunaFloraBreakdown = () => {
       download: true,
       header: true,
       complete: (results) => {
-        const categoryCounts = results.data.reduce((acc, row) => {
-          // Assuming there's a 'Category' column in your CSV
+        let filteredData = results.data
+          .filter((row) => {
+            const hasPublishedDate =
+              row.publishedAt && new Date(row.publishedAt).getTime() > 0;
+            const isLandscapeNotNone = row["Landscape-Location"];
+            const hasAuthor = row["author"];
+            return hasPublishedDate && isLandscapeNotNone && hasAuthor;
+          })
+          .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+
+        let categoryCounts = filteredData.reduce((acc, row) => {
           const categories = row["Flora_and_Fauna"]?.split(",");
           categories?.forEach((category) => {
             category = category.replace(/\(.*?\)/g, "").trim();
@@ -48,9 +57,17 @@ const FaunaFloraBreakdown = () => {
           return acc;
         }, {});
 
-        const labels = Object.keys(categoryCounts);
-        const data = Object.values(categoryCounts);
-        const backgroundColors = chartData.labels.map(
+        // Sort the categories by count in descending order
+        let sortedCategories = Object.entries(categoryCounts).sort(
+          (a, b) => b[1] - a[1]
+        );
+
+        // Separate the sorted data back into labels and data arrays
+        const labels = sortedCategories.map((item) => item[0]);
+        const data = sortedCategories.map((item) => item[1]);
+
+        // Assign a color to each category
+        const backgroundColors = labels.map(
           (_, index) => colors[index % colors.length]
         );
 
@@ -60,13 +77,13 @@ const FaunaFloraBreakdown = () => {
             {
               label: "Number of Articles",
               data: data,
-              backgroundColor: backgroundColors, // Example background color
+              backgroundColor: backgroundColors, // Assigning colors
             },
           ],
         });
       },
     });
-  }, [chartData.labels]);
+  }, []);
 
   const options = {
     indexAxis: "y",
