@@ -77,7 +77,6 @@ const LandscapeOverview = () => {
     });
   }, []);
 
-  console.log(landscapeCounts);
   return (
     <div className="landscape-overview">
       <h2 className="landscape-heading">Landscape Overview</h2>

@@ -69,7 +69,6 @@ const GlobalFilter = ({ globalFilter, setGlobalFilter }) => {
 
 const AllArticlesList = ({ isAbridged }) => {
   const [data, setData] = useState([]);
-
   useEffect(() => {
     Papa.parse(csvData, {
       download: true,
@@ -156,6 +155,20 @@ const AllArticlesList = ({ isAbridged }) => {
         accessor: "Landscape-Location",
         Filter: SelectColumnFilter, // A custom select filter component
         filter: "includes",
+        disableSortBy: true, // Disable sorting on this column
+      },
+      {
+        Header: "Relevant to Conservation",
+        id: "conservationRelevance",
+        accessor: (row) =>
+          row["gpt-relevance_to_conservation"] > 0.5 ? "✓" : "✗",
+        disableSortBy: true, // Disable sorting on this column
+      },
+      // Column for Relevance to Infrastructure
+      {
+        Header: "Relevant to Infrastructure",
+        id: "infrastructureRelevance",
+        accessor: (row) => (row["gpt-relevance_to_infra"] > 0.5 ? "✓" : "✗"),
         disableSortBy: true, // Disable sorting on this column
       },
     ],
@@ -281,8 +294,8 @@ const AllArticlesList = ({ isAbridged }) => {
       <div className={!isAbridged ? "table-container" : ""}>
         <table {...getTableProps()} className="table">
           <thead>
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroups.map((headerGroup, idx) => (
+              <tr key={idx} {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map((column) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
@@ -311,9 +324,11 @@ const AllArticlesList = ({ isAbridged }) => {
               prepareRow(row);
               return (
                 <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
+                  {row.cells.map((cell, cellIdx) => {
                     return (
-                      <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                      <td key={cellIdx} {...cell.getCellProps()}>
+                        {cell.render("Cell")}
+                      </td>
                     );
                   })}
                 </tr>
