@@ -1,7 +1,7 @@
 import React from "react";
 import "./LandscapeMap.css";
 
-const LandscapeMap = ({ landscapeCounts }) => {
+const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
   // Initialize regions with their names and default styles
   const regions = [
     {
@@ -49,7 +49,7 @@ const LandscapeMap = ({ landscapeCounts }) => {
       name: "Kanchenjunga Landscape",
       style: {
         top: "65%",
-        left: "85%",
+        left: "84%",
         height: "25%",
         width: "4%",
         position: "absolute",
@@ -61,6 +61,12 @@ const LandscapeMap = ({ landscapeCounts }) => {
     // Assign count from landscapeCounts or default to 0 if not found
     count: landscapeCounts[region.name] || 0,
   }));
+
+  let otherArticlesCount = totalArticles;
+
+  regions.forEach((region) => {
+    otherArticlesCount = otherArticlesCount - region.count;
+  }); // Replace with actual count as needed
 
   return (
     <div className="landscape-map">
@@ -79,6 +85,9 @@ const LandscapeMap = ({ landscapeCounts }) => {
             </div>
           ))}
         </div>
+      </div>
+      <div className="other-articles-indicator">
+        Other articles: {otherArticlesCount}
       </div>
     </div>
   );

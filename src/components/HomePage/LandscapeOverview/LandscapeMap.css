@@ -1,6 +1,6 @@
 .landscape-map {
     width: 50%;
-    padding: 20px;
+    padding: 20px 20px 20px 0px;
   }
   
   .map-container {
@@ -50,4 +50,12 @@
   .info:hover{
     font-weight: bold;
     
+  }
+  .other-articles-indicator {
+    top: 0;
+    right: 0;
+    color: #333; /* Text color, change as needed */
+    font-weight: bold;
+    z-index: 10; /* Ensure it's above other elements */
+    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for hover effect */
   }

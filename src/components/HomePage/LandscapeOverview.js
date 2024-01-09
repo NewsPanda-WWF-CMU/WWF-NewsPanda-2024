@@ -82,7 +82,10 @@ const LandscapeOverview = () => {
     <div className="landscape-overview">
       <h2 className="landscape-heading">Landscape Overview</h2>
       <div className="landscape-content">
-        <LandscapeMap landscapeCounts={landscapeCounts} />
+        <LandscapeMap
+          landscapeCounts={landscapeCounts}
+          totalArticles={data.length}
+        />
         <ArticleStats
           articleCount={data.length}
           conservationEvents={conservationEvents}
