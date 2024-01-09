@@ -36,7 +36,7 @@ const HomePage = () => {
             <AllArticlesList isAbridged={true} />
           </div>
 
-          <div className="flora-fauna-breakdown">
+          <div className="flora">
             <h2 className="home-page-subtitle "> Flora Fauna Breakdown </h2>
 
             {/* Placeholder for the flora and fauna bar graph */}

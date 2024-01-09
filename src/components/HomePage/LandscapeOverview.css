@@ -1,7 +1,7 @@
 .landscape-overview {
     background: #fff;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     padding: 20px; /* Adequate padding around the card */
     margin: 20px; /* Space below the card */
     display: flex;
