@@ -11,6 +11,10 @@
     
 }
 
+.mobile-disclaimer {
+    text-align: center;
+}
+
 .home-page-subtitle {
     margin: 4px 0px 12px 0px !important
 }
@@ -55,10 +59,15 @@
     }
   
     /* Hide the rest of the content for mobile devices */
-    .dashboard-title,
-    .dashboard-content {
-      display: none;
+    .article-stats-container{
+      display: none !important;
     }
+    .recent-articles {
+        display: none !important;
+    }
+    .flora {
+        width: 100% !important;
+      }
   }
 
 @media (min-width: 768px) {
@@ -67,8 +76,14 @@
       }
     
       /* Hide the rest of the content for mobile devices */
-      .dashboard-title,
-      .dashboard-content {
-        display: block;
+      .article-stats-container {
+        display: grid;
+      }
+
+      .recent-articles {
+        display: flex;
+      }
+      .flora {
+        width: 40% !important;
       }
 }
