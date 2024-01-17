@@ -79,7 +79,9 @@ const AllArticlesList = ({ isAbridged }) => {
             const hasPublishedDate =
               row.publishedAt && new Date(row.publishedAt).getTime() > 0;
             const isLandscapeNotNone = row["Landscape-Location"];
-            const isLandscapeNotOther = row["Landscape-Location"] !== "Other";
+            const isLandscapeNotOther =
+              row["Landscape-Location"] !== "Other" &&
+              row["Landscape-Location"].replace(/ /g, "") !== "Other(Nepal)";
             const hasAuthor = row["author"];
             if (isAbridged) {
               return (
