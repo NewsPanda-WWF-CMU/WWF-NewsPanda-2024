@@ -3,8 +3,10 @@ import React from "react";
 import "./Header.css"; // Make sure the path to the CSS file is correct
 import wwfLogo from "../images/wwf-logo.png";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "./Auth/AuthContext";
 const Header = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
   return (
     <header className="header">
       <div className="header-logo">
@@ -28,6 +30,15 @@ const Header = () => {
             }}
           >
             All Articles View
+          </span>
+          <span
+            className="header-dropdown-item"
+            onClick={() => {
+              logout();
+              navigate("/login");
+            }}
+          >
+            Logout
           </span>
         </div>
       </div>
