@@ -7,7 +7,7 @@ const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
     {
       name: "Terai Arc Landscape",
       style: {
-        top: "60%",
+        top: "65%",
         left: "14%",
         height: "10%",
         width: "50%",
@@ -18,8 +18,8 @@ const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
     {
       name: "Sacred Himalayan Landscape",
       style: {
-        top: "65%",
-        left: "73%",
+        top: "67%",
+        left: "80%",
         height: "10%",
         width: "10%",
         position: "absolute",
@@ -28,8 +28,8 @@ const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
     {
       name: "Kailash Sacred Landscape",
       style: {
-        top: "18%",
-        left: "20%",
+        top: "19%",
+        left: "15%",
         height: "10%",
         width: "10%",
         position: "absolute",
@@ -49,7 +49,7 @@ const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
       name: "Kanchenjunga Landscape",
       style: {
         top: "65%",
-        left: "84%",
+        left: "93%",
         height: "25%",
         width: "4%",
         position: "absolute",
@@ -74,13 +74,13 @@ const LandscapeMap = ({ landscapeCounts, totalArticles }) => {
         {regions.map((region) => (
           <div
             key={region.name}
-            className={`region-overlay `}
+            className="region-overlay"
             style={region.style}
           ></div>
         ))}
         <div className="info-container">
           {regions.map((region) => (
-            <div key={region.name} style={region.style} className={"info"}>
+            <div key={region.name} style={region.style} className="info">
               {region.count}
             </div>
           ))}

@@ -1,61 +1,66 @@
 .landscape-map {
-    width: 50%;
-    padding: 20px 20px 20px 0px;
-  }
-  
-  .map-container {
-    position: relative;
-    background-image: url('../../../images/landscape-map.gif'); /* Replace with your image path */
-    background-size: contain;
-    background-position: center;
-    width: 100%;
-    height: 300px;
-    background-repeat: no-repeat;
-  }
-  
-  .region-overlay {
-    position: absolute;
-    background-color: transparent; /* Make divs invisible */
-    cursor: pointer;
-    /* Adding a subtle hover effect for region overlays */
-    transition: background-color 0.3s ease;
-  }
-  
-  .region-overlay:hover {
-    /* A subtle hint on hover to indicate the area is interactive */
-    background-color: rgba(255, 255, 255, 0.2);
-  }
-  
-  .info-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-   
-  }
+  width: 100%;
+  padding: 20px 20px 20px 0px;
+}
 
-  .info{
-    font-size: 32px;
-  }
+.map-container {
+  position: relative;
+  background-image: url('../../../images/landscape-map.gif'); /* Replace with your image path */
+  background-size: contain;
+  background-position: center;
+  width: 100%;
+  height: 0; /* Updated */
+  padding-top: 56.25%; /* Aspect ratio of the image (16:9 in this case) */
+  background-repeat: no-repeat;
+}
 
-  .info-count {
-    width: 32px !important;
-    height: 32px !important;
-    border-radius: 50%;
-    background-color: transparent;
-    border: 1px solid black ;
+.region-overlay {
+  position: absolute;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.region-overlay:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.info-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.info {
+  font-size: 1.5vw; /* Responsive font size */
+}
+
+.info-count {
+  width: 2vw;
+  height: 2vw;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+.info:hover {
+  font-weight: bold;
+}
+
+.other-articles-indicator {
+  top: 0;
+  right: 0;
+  color: #333;
+  font-weight: bold;
+  z-index: 10;
+  transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 600px) {
+  .info {
+      font-size: 3vw; /* Larger font size for smaller screens */
   }
-  
-  .info:hover{
-    font-weight: bold;
-    
-  }
-  .other-articles-indicator {
-    top: 0;
-    right: 0;
-    color: #333; /* Text color, change as needed */
-    font-weight: bold;
-    z-index: 10; /* Ensure it's above other elements */
-    transition: transform 0.3s, background-color 0.3s; /* Smooth transition for hover effect */
-  }
+}
