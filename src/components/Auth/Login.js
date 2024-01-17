@@ -1,5 +1,5 @@
 // Login.js
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import CryptoJS from "crypto-js";
@@ -9,8 +9,14 @@ import wwfLogo from "../../images/wwf-logo.png";
 const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/");
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = (event) => {
     event.preventDefault(); // Prevent the default form submit action
