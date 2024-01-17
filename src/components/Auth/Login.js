@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import CryptoJS from "crypto-js";
 import "./Login.css";
+import wwfLogo from "../../images/wwf-logo.png";
 
 const Login = () => {
   const [password, setPassword] = useState("");
@@ -28,6 +29,7 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
+        <img className="wwf-logo-login" src={wwfLogo} alt="wwf-logo" />
         <h2>WWF Nepal Dashboard</h2>
         <form onSubmit={handleLogin}>
           <input
