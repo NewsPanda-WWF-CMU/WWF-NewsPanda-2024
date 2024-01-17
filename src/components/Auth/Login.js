@@ -37,6 +37,7 @@ const Login = () => {
       <div className="login-card">
         <img className="wwf-logo-login" src={wwfLogo} alt="wwf-logo" />
         <h2>WWF Nepal Dashboard</h2>
+        <p>Note: Designed for Laptops and PC Screens</p>
         <form onSubmit={handleLogin}>
           <input
             type="password"

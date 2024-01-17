@@ -12,6 +12,14 @@ const HomePage = () => {
     <div className="App">
       <Header />
 
+      {/* Add the disclaimer for mobile devices */}
+      <div className="mobile-disclaimer">
+        <p>
+          Please view this page on a laptop or larger screen for the best
+          experience.
+        </p>
+      </div>
+
       <h1 className="dashboard-title">Dashboard</h1>
 
       <div className="dashboard-content">

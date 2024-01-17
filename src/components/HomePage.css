@@ -46,3 +46,29 @@
     padding-top: 8px;
 
 }
+
+/* Add a media query for screens with a maximum width of 768px (adjust the value as needed) */
+@media (max-width: 768px) {
+    /* Add styles for mobile devices here */
+    .mobile-disclaimer {
+      display: block; /* Show the disclaimer on mobile */
+    }
+  
+    /* Hide the rest of the content for mobile devices */
+    .dashboard-title,
+    .dashboard-content {
+      display: none;
+    }
+  }
+
+@media (min-width: 768px) {
+    .mobile-disclaimer {
+        display: none; /* Show the disclaimer on mobile */
+      }
+    
+      /* Hide the rest of the content for mobile devices */
+      .dashboard-title,
+      .dashboard-content {
+        display: block;
+      }
+}
