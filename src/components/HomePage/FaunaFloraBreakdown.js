@@ -46,6 +46,9 @@ const FaunaFloraBreakdown = () => {
         let categoryCounts = filteredData.reduce((acc, row) => {
           const categories = row["Flora_and_Fauna"]?.split(",");
           categories?.forEach((category) => {
+            if (category === "nan") {
+              return;
+            }
             category = category.replace(/\(.*?\)/g, "").trim();
             if (category) {
               if (!(category in acc)) {
@@ -62,6 +65,9 @@ const FaunaFloraBreakdown = () => {
           (a, b) => b[1] - a[1]
         );
 
+        sortedCategories = sortedCategories.filter(
+          (category) => category[1] > 1
+        );
         // Separate the sorted data back into labels and data arrays
         const labels = sortedCategories.map((item) => item[0]);
         const data = sortedCategories.map((item) => item[1]);

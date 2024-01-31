@@ -81,7 +81,7 @@ const AllArticlesList = ({ isAbridged }) => {
             const isLandscapeNotNone = row["Landscape-Location"];
             const isLandscapeNotOther =
               row["Landscape-Location"] !== "Other" &&
-              row["Landscape-Location"].replace(/ /g, "") !== "Other(Nepal)";
+              row["Landscape-Location"]?.replace(/ /g, "") !== "Other(Nepal)";
             const hasAuthor = row["author"];
             if (isAbridged) {
               return (
