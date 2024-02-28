@@ -82,16 +82,18 @@ const AllArticlesList = ({ isAbridged }) => {
             const isLandscapeNotOther =
               row["Landscape-Location"] !== "Other" &&
               row["Landscape-Location"]?.replace(/ /g, "") !== "Other(Nepal)";
-            const hasAuthor = row["author"];
+            let hasAuthor = row["author"];
+            if (!hasAuthor) {
+              row["author"] = row["source_name"];
+              hasAuthor = true;
+              console.log(row["publishedAt"]);
+            }
             if (isAbridged) {
               return (
-                hasPublishedDate &&
-                isLandscapeNotNone &&
-                hasAuthor &&
-                isLandscapeNotOther
+                hasPublishedDate && isLandscapeNotNone && isLandscapeNotOther
               );
             }
-            return hasPublishedDate && isLandscapeNotNone && hasAuthor;
+            return hasPublishedDate && isLandscapeNotNone;
           })
           .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
         if (isAbridged) {
