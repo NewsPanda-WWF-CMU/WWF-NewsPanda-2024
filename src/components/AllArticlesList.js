@@ -76,7 +76,7 @@ const AllArticlesList = ({ isAbridged }) => {
       complete: (results) => {
         let filteredData = results.data
           .filter((row) => {
-            const hasPublishedDate =
+            let hasPublishedDate =
               row.publishedAt && new Date(row.publishedAt).getTime() > 0;
             const isLandscapeNotNone = row["Landscape-Location"];
             const isLandscapeNotOther =
@@ -86,8 +86,9 @@ const AllArticlesList = ({ isAbridged }) => {
             if (!hasAuthor) {
               row["author"] = row["source_name"];
               hasAuthor = true;
-              console.log(row["publishedAt"]);
             }
+            console.log(hasPublishedDate);
+
             if (isAbridged) {
               return (
                 hasPublishedDate && isLandscapeNotNone && isLandscapeNotOther
@@ -96,6 +97,7 @@ const AllArticlesList = ({ isAbridged }) => {
             return hasPublishedDate && isLandscapeNotNone;
           })
           .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
+        console.log(filteredData);
         if (isAbridged) {
           filteredData = filteredData.slice(0, 7);
         }
