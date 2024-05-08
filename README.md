@@ -1,6 +1,6 @@
-# Nepal React Dashboard
+# 2024 NewsPanda
 
-This is a react app that contains python scripts that are run to run the entire pipeline for the WWF nepal dashboard.
+This is a react app based repository which contains the WWF-Nepal-Dashboard and python-scripts that are run to run the entire pipeline for the Updated 2024 NewsPanda. 
 
 ## Available Scripts
 
