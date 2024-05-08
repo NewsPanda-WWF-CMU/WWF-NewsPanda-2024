@@ -8,7 +8,7 @@ import {
 } from "react-table";
 import Papa from "papaparse";
 import Header from "./Header"; // Make sure this is correctly imported
-import csvData from "../data/test-last-year-nepal-cleaned.csv"; // Update the import to the correct path
+import csvData from "../data/current-nepal-articles.csv"; // Update the import to the correct path
 import "./AllArticlesList.css";
 
 // This is a custom filter UI for selecting a unique option from a list

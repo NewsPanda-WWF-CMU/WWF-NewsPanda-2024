@@ -33,5 +33,17 @@ To deploy to the webpage.
 You must first build the app with `npm run build`
 And finally deploy with `firebase deploy`
 
+# TO RUN WEEKLY PIPELINE FOR NEPAL
 
+Go to python-scripts directory
+
+Run `scrape-websites.py` script.
+
+Run `combine-csvs-nepal.py` script.
+
+Go to root directory.
+
+Run `npm build`
+
+Run `firebase deploy`
 

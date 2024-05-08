@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Papa from "papaparse";
 import { Bar } from "react-chartjs-2";
 import "chart.js/auto";
-import csvData from "../../data/test-last-year-nepal-cleaned.csv"; // Path to your CSV file
+import csvData from "../../data/current-nepal-articles.csv"; // Path to your CSV file
 
 const colors = [
   "#FF6384",

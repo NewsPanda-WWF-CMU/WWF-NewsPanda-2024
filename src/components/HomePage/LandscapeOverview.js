@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 // import nepalGeography from "../../mapData/output.json";
 import ArticleStats from "./LandscapeOverview/ArticleStats";
 import Papa from "papaparse";
-import csvData from "../../data/test-last-year-nepal-cleaned.csv";
+import csvData from "../../data/current-nepal-articles.csv";
 import "./LandscapeOverview.css";
 import LandscapeMap from "./LandscapeOverview/LandscapeMap";
 
