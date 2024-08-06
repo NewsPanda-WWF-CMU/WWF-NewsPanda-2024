@@ -34,6 +34,14 @@ const Header = () => {
           <span
             className="header-dropdown-item"
             onClick={() => {
+              navigate("/events");
+            }}
+          >
+            All Events View
+          </span>
+          <span
+            className="header-dropdown-item"
+            onClick={() => {
               logout();
               navigate("/login");
             }}

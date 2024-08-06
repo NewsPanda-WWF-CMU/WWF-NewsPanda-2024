@@ -6,6 +6,7 @@ import HomePage from "./components/HomePage";
 import { AuthProvider } from "./components/Auth/AuthContext";
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import Login from "./components/Auth/Login";
+import AllEventsList from "./components/AllEvents";
 
 function App() {
   return (
@@ -19,6 +20,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <AllArticleList />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events"
+            element={
+              <ProtectedRoute>
+                <AllEventsList />
               </ProtectedRoute>
             }
           />
